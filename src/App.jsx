@@ -1,35 +1,16 @@
-import React from "react";
 import Navbar from "./components/Navbar";
-import Button from "./components/Button";
-import TimeSlots from "./components/ButtonList";
-
-import { format } from "date-fns";
-import { DayPicker } from "react-day-picker";
-// Your App.tsx file
-import "react-day-picker/dist/style.css";
+import MeetingDetailsForm from "./components/MeetingDetailsForm";
+import DateAndTime from "./components/DateAndTime";
+import { useState } from "react";
 
 export default function App() {
-  const [selectedDate, setSelectedDate] = React.useState();
-
-  let footer = <p>Please pick a day.</p>;
-  if (selectedDate) {
-    footer = <p>You picked {format(selectedDate, "PP")}.</p>;
-  }
+  const [step, setStep] = useState(1);
   return (
     <div>
       <Navbar />
       <div className="container mx-auto">
-        <div className="rounded overflow-hidden shadow-lg my-8 flex">
-          <div>
-            <DayPicker
-              mode="single"
-              selected={selectedDate}
-              onSelect={setSelectedDate}
-              footer={footer}
-            />
-          </div>
-          <div>{selectedDate ? <TimeSlots /> : ""}</div>
-        </div>
+        {step === 1 && <DateAndTime setStep={setStep} />}
+        {step === 2 && <MeetingDetailsForm setStep={setStep} />}
       </div>
     </div>
   );
