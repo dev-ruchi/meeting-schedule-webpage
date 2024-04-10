@@ -1,12 +1,18 @@
-import React, { useState } from "react";
 
-const MeetingDetailsForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+
+const MeetingDetailsForm = ({ setStep, name, email, setEmail, setName }) => {
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submited");
+  }
 
   return (
     <div className="w-full max-w-xl">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-2">
+      <form
+        type="submit"
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-2"
+      >
         <div>
           <h1 className="items-center text-4xl text-black mb-8">
             Enter Details
@@ -39,11 +45,19 @@ const MeetingDetailsForm = () => {
               className="border-2 w-full h-12 rounded-xl pl-2"
             />
           </div>
-          <button className="px-6 py-3 mt-4 rounded-full border text-blue-600 border-blue-600">
+          <button
+            onClick={() => setStep(3)}
+            className="px-6 py-3 mt-4 rounded-full border text-blue-600 border-blue-600"
+          >
             Add Guests
           </button>
         </div>
-
+      </form>
+      <form
+        type="submit"
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-2"
+      >
         <p className="text-xl font-bold mb-4 mt-8">
           I want Fibery to work for:*
         </p>
@@ -231,7 +245,11 @@ const MeetingDetailsForm = () => {
               className="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border"
             ></textarea>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded">
+          <button
+            type="submit"
+            onClick={() => setStep(3)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded"
+          >
             Schedule Event
           </button>
         </div>
