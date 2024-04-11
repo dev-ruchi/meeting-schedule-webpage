@@ -57,7 +57,7 @@ const MeetingScheduled = ({
       <div className="block max-w-sm p-6 border border-gray-400 rounded-lg shadow bg-gray-50">
         <div>
           {guests.map((guest) => (
-            <p key={guest}>{guest.name}</p>
+            <p key={guest.email}>{guest.name}</p>
           ))}
         </div>
         <p>{selectedTime}</p>

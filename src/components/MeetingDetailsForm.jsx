@@ -65,7 +65,7 @@ const MeetingDetailsForm = ({ setStep, guests, setGuests }) => {
 
           <div className="mt-2">
             {guests.map((guest) => (
-              <p key={guest}>{guest.name}</p>
+              <p key={guest.email}>{guest.name}</p>
             ))}
           </div>
         </div>
