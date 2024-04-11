@@ -23,7 +23,7 @@ function TimeSlots({ selectedTime, setSelectedTime, setStep }) {
     <div className="h-96 overflow-y-scroll">
       {timeSlots.map((time) => {
         return (
-          <div className="mb-1">
+          <div className="mb-1" key={time}>
             {time == selectedTime ? (
               <div className="flex w-56 gap-1">
                 <button className="px-8 py-2 border-2 rounded w-full text-blue-600">

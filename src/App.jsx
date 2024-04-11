@@ -7,16 +7,45 @@ import { useState } from "react";
 export default function App() {
   const [step, setStep] = useState(1);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [guests, setGuests] = useState([]);
+
+  const [selectedDate, setSelectedDate] = useState();
+  const [selectedTime, setSelectedTime] = useState();
+  const [selectedTimezone, setSelectedTimezone] = useState(
+    "(GMT-12:00) International Date Line West"
+  );
 
   return (
     <div>
       <Navbar />
       <div className="container mx-auto">
-        {step === 1 && <DateAndTime setStep={setStep} />}
-        {step === 2 && <MeetingDetailsForm name={name} email={email} setName={setName} setEmail={setEmail} setStep={setStep} />}
-        {step === 3 && <MeetingScheduled name={name} email={email} setStep={setStep} />}
+        {step === 1 && (
+          <DateAndTime
+            setStep={setStep}
+            selectedDate={selectedDate}
+            selectedTime={selectedTime}
+            selectedTimezone={selectedTimezone}
+            setSelectedDate={setSelectedDate}
+            setSelectedTime={setSelectedTime}
+            setSelectedTimezone={setSelectedTimezone}
+          />
+        )}
+        {step === 2 && (
+          <MeetingDetailsForm
+            setStep={setStep}
+            guests={guests}
+            setGuests={setGuests}
+          />
+        )}
+        {step === 3 && (
+          <MeetingScheduled
+            guests={guests}
+            setStep={setStep}
+            selectedDate={selectedDate}
+            selectedTime={selectedTime}
+            selectedTimezone={selectedTimezone}
+          />
+        )}
       </div>
     </div>
   );

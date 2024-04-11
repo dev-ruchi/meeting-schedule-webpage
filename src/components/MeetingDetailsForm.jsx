@@ -1,16 +1,28 @@
+import { useState } from "react";
 
+const MeetingDetailsForm = ({ setStep, guests, setGuests }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-const MeetingDetailsForm = ({ setStep, name, email, setEmail, setName }) => {
+  function addGuest(e) {
+    e.preventDefault();
+
+    setGuests((oldValue) => [...oldValue, { name, email }]);
+
+    setEmail("");
+    setName("");
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submited");
+    setStep(3);
   }
 
   return (
     <div className="w-full max-w-xl">
       <form
         type="submit"
-        onSubmit={handleSubmit}
+        onSubmit={addGuest}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-2"
       >
         <div>
@@ -29,6 +41,7 @@ const MeetingDetailsForm = ({ setStep, name, email, setEmail, setName }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="border-2 w-full h-12 rounded-xl pl-2"
+              required
             />
           </div>
           <div>
@@ -39,18 +52,22 @@ const MeetingDetailsForm = ({ setStep, name, email, setEmail, setName }) => {
               Email *
             </label>
             <input
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="border-2 w-full h-12 rounded-xl pl-2"
+              required
             />
           </div>
-          <button
-            onClick={() => setStep(3)}
-            className="px-6 py-3 mt-4 rounded-full border text-blue-600 border-blue-600"
-          >
+          <button className="px-6 py-3 mt-4 rounded-full border text-blue-600 border-blue-600">
             Add Guests
           </button>
+
+          <div className="mt-2">
+            {guests.map((guest) => (
+              <p key={guest}>{guest.name}</p>
+            ))}
+          </div>
         </div>
       </form>
       <form
@@ -247,7 +264,6 @@ const MeetingDetailsForm = ({ setStep, name, email, setEmail, setName }) => {
           </div>
           <button
             type="submit"
-            onClick={() => setStep(3)}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-6 px-4 rounded"
           >
             Schedule Event
